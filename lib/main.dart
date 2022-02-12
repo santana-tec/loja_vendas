@@ -18,7 +18,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Sua Loja',
       theme: ThemeData(
-        primarySwatch: Colors.lightGreen,
+        primaryColor:  Colors.lightGreen,
+        scaffoldBackgroundColor: Colors.lightGreen,
+        appBarTheme: const AppBarTheme(
+            //backgroundColor: Colors.lightGreen,
+            elevation: 0
+        ),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: BaseScreen(),
     );
