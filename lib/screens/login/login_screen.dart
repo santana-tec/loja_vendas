@@ -1,76 +1,87 @@
 import 'package:flutter/material.dart';
+import 'package:loja_vendas/helpers/validators.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passController = TextEditingController();
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  LoginScreen({Key? key}) : super(key: key);
+
+  //const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         backgroundColor: Colors.lightGreen,
-
         title: const Text('Entrar'),
         centerTitle: true,
-
       ),
       body: Center(
         child: Card(
           margin: const EdgeInsets.symmetric(horizontal: 16),
-          child: ListView(
-            padding: const EdgeInsets.all(16),
-            shrinkWrap: true,
-            children: <Widget>[
-              TextFormField(
-                decoration: const InputDecoration(hintText: 'E-mail'),
-                keyboardType: TextInputType.emailAddress,
-                autocorrect: false,
-                validator: (email){
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16,),
-              TextFormField(
-                decoration: const InputDecoration(hintText: 'Senha'),
-                autocorrect: false,
-                obscureText: true,
-                validator: (pass){
-                  if(pass != null || pass!.length < 6) {
-                    return 'Senha inválida';
-                  }
-                  return null;
-                },
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: FlatButton(
-                  onPressed: (){
-
+          child: Form(
+            key: formKey,
+            child: ListView(
+              padding: const EdgeInsets.all(16),
+              shrinkWrap: true,
+              children: <Widget>[
+                TextFormField(
+                  decoration: const InputDecoration(hintText: 'E-mail'),
+                  keyboardType: TextInputType.emailAddress,
+                  autocorrect: false,
+                  validator: (email) {
+                    if (!emailValid(email!)) return "E-mail invalido";
+                    return null;
                   },
-                  padding: EdgeInsets.zero,
-                  child: const Text(
-                      'Esqueci minha senha'
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(hintText: 'Senha'),
+                  autocorrect: false,
+                  obscureText: true,
+                  validator: (pass) {
+                    if (!passwordValid(pass!)) {
+                      return 'Senha inválida (ex Senha1234!)';
+                    }
+                    return null;
+                  },
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: FlatButton(
+                    onPressed: () {},
+                    padding: EdgeInsets.zero,
+                    child: const Text('Esqueci minha senha'),
                   ),
                 ),
-              ),
-              const SizedBox(height: 16,),
-              SizedBox(
-                height: 44,
-                child: RaisedButton(
-                  onPressed: (){
-
-                  },
-                  color: Theme.of(context).primaryColor,
-                  textColor: Colors.white,
-                  child: const Text(
-                    'Entrar',
-                    style: TextStyle(
-                        fontSize: 18
+                const SizedBox(
+                  height: 16,
+                ),
+                SizedBox(
+                  height: 44,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Theme.of(context).primaryColor,
+                      onPrimary: Colors.white,
+                    ),
+                    onPressed: () {
+                      formKey.currentState?.validate();
+                      print(emailController.text);
+                      print(emailController.text);
+                    },
+                    child: const Text(
+                      'Entrar',
+                      style: TextStyle(fontSize: 18),
                     ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
