@@ -29,6 +29,7 @@ class LoginScreen extends StatelessWidget {
               shrinkWrap: true,
               children: <Widget>[
                 TextFormField(
+                  controller: emailController,
                   decoration: const InputDecoration(hintText: 'E-mail'),
                   keyboardType: TextInputType.emailAddress,
                   autocorrect: false,
@@ -41,6 +42,7 @@ class LoginScreen extends StatelessWidget {
                   height: 16,
                 ),
                 TextFormField(
+                  controller: passController,
                   decoration: const InputDecoration(hintText: 'Senha'),
                   autocorrect: false,
                   obscureText: true,
@@ -72,7 +74,7 @@ class LoginScreen extends StatelessWidget {
                     onPressed: () {
                       formKey.currentState?.validate();
                       print(emailController.text);
-                      print(emailController.text);
+                      print(passController.text);
                     },
                     child: const Text(
                       'Entrar',
