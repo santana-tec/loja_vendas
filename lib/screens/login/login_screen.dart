@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:loja_vendas/helpers/validators.dart';
+import 'package:loja_vendas/models/user_manager.dart';
+import 'package:loja_vendas/models/usuario.dart';
+import 'package:provider/src/provider.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -71,10 +74,16 @@ class LoginScreen extends StatelessWidget {
                       primary: Theme.of(context).primaryColor,
                       onPrimary: Colors.white,
                     ),
-                    onPressed: () {
-                      formKey.currentState?.validate();
-                      print(emailController.text);
-                      print(passController.text);
+                    onPressed: (){
+                      if(formKey.currentState!.validate()){
+                        print(emailController.text);
+                        context.read<UserManager>().signIn(
+                          Usuario(
+                            email: emailController.text,
+                            password: passController.text
+                          )
+                        );
+                      }
                     },
                     child: const Text(
                       'Entrar',

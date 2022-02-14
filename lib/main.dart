@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:loja_vendas/models/user_manager.dart';
 import 'package:loja_vendas/screens/base/base_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,19 +16,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Sua Loja',
-      theme: ThemeData(
-        primaryColor:  Colors.lightGreen,
-        scaffoldBackgroundColor: Colors.lightGreen,
-        appBarTheme: const AppBarTheme(
-            //backgroundColor: Colors.lightGreen,
-            elevation: 0
+    return Provider(
+      create: (_) => UserManager(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Sua Loja',
+        theme: ThemeData(
+          primaryColor:  Colors.lightGreen,
+          scaffoldBackgroundColor: Colors.lightGreen,
+          appBarTheme: const AppBarTheme(
+              //backgroundColor: Colors.lightGreen,
+              elevation: 0
+          ),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        home: BaseScreen(),
       ),
-      home: BaseScreen(),
     );
   }
 }
