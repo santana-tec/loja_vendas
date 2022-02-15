@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:loja_vendas/helpers/validators.dart';
 import 'package:loja_vendas/models/user_manager.dart';
 import 'package:loja_vendas/models/usuario.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
